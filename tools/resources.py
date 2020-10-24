@@ -44,12 +44,12 @@ def date_convert(date):
 
 def generate_trace(ein):
     new_ein = ein[:5]
-    trace = str(random.randrange(10000000000))
-    if len(trace) < 10:
-        a = 10 - len(trace)
+    trace = str(random.randrange(10000000))
+    if len(trace) < 7:
+        a = 7 - len(trace)
         b = '0' * a
         trace = b + trace
-    return new_ein + trace
+    return ein + trace
 
 def pad_zeros(field_len, inpt):
     b = field_len - len(inpt)
