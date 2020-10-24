@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from conversion_codes import TransCodes as tc
 from Database import *
+from GUI.ScrollableFrame import ScrollableFrame
 
 
 class AddReceiver(ttk.Frame):
@@ -151,7 +152,7 @@ class AddReceiver(ttk.Frame):
         for widget in self.receiver_form_frame.winfo_children():
             widget.destroy()
 
-        # scrollable_frame = ScrollableFrame(receiver_form_frame)
+        scrollable_frame = ScrollableFrame(self.receiver_form_frame)
 
         count = self.form_count_val.get()
 
@@ -160,7 +161,7 @@ class AddReceiver(ttk.Frame):
                 tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar()
             ])
 
-            receiver_frame = ttk.Frame(self.receiver_form_frame, style="Function.TFrame" )
+            receiver_frame = ttk.Frame(scrollable_frame, style="Function.TFrame" )
             receiver_frame.grid(row=c, column=0, columnspan=5, sticky="NSEW", padx=5, pady=5)
 
             receiver_name_label = ttk.Label(receiver_frame, text="Receiver Name: ", style="Field.TLabel")
@@ -192,7 +193,7 @@ class AddReceiver(ttk.Frame):
             amount_label.grid(row=2, column=0, pady=2, padx=2, sticky="EW")
             amount_entry.grid(row=2, column=1, pady=2, padx=2, sticky="EW")
 
-        # scrollable_frame.grid(row=1, column=0, columnspan=5, sticky="EW")
+        scrollable_frame.grid(row=1, column=0, columnspan=5, sticky="EW")
 
 
     def handle_edit_receiver(self):
@@ -204,7 +205,7 @@ class AddReceiver(ttk.Frame):
         edit_receiver_frame_label = ttk.Label(self.add_receiver_frame, text="update receiver info.", style="Table.TLabel")
         edit_receiver_frame_label.grid(row=0, column=0, sticky="NSEW", padx=5)
 
-        # scrollable_frame = ScrollableFrame(edit_receiver_frame)
+        scrollable_frame = ScrollableFrame(edit_receiver_frame)
 
         selection = self.originators_list_box.get(self.originators_list_box.curselection())
         receivers_list = [val.get('name') for val in get_active_receivers(selection)]
@@ -227,7 +228,7 @@ class AddReceiver(ttk.Frame):
                     [tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar(), tk.StringVar()]
                 )
 
-                receiver_frame = ttk.Frame(edit_receiver_frame, style="Function.TFrame" )
+                receiver_frame = ttk.Frame(scrollable_frame, style="Function.TFrame" )
                 receiver_frame.grid(row=pos+1, column=0, columnspan=5, sticky="NSEW", padx=5, pady=5)
 
                 receiver_name_label = ttk.Label(receiver_frame, text="Receiver Name: ", style="Field.TLabel")
@@ -275,7 +276,7 @@ class AddReceiver(ttk.Frame):
                 amount_entry.grid(row=2, column=1, pady=2, padx=2, sticky="EW")
                 delete_user_checkbutton.grid(row=2, column=3, padx=2, pady=2, sticky="EW")
 
-            # scrollable_frame.grid(row=0, columnspan=5, sticky="NSEW")
+            scrollable_frame.grid(row=0, columnspan=5, sticky="NSEW")
 
         else:
             no_receiver_data_label = ttk.Label(edit_receiver_frame, text="NO RECEIVER DATA AVAILABLE")
